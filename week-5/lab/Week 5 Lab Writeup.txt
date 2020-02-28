@@ -1,0 +1,24 @@
+4. Because running the program gives the error
+
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4
+	at DebuggingExercise.main(DebuggingExercise.java:9)
+
+there may be a problem with the for loop. I set a breakpoint on line 6 and started stepping through.  Once i reaches 4, it throws the exception because it's triying to add int 4 to number[4], which doesn't exist because the array only goes to number[3].
+
+There's two ways to fix this, either increasing the array size to 5 in line 5, or changing line 6 to be i < 4 (to stay within bounds of the array).
+
+5. I should have been searching for the infinite loop portion to set a break point and hit counter for the desired number (49,791).  I mistakenly did the wrong loop, the for loop on line 61 first.  The correct line is 32 on the while loop.
+
+6. First I ran the program and it returns 987 for an input of 15.  After looking up the Fibonacci Sequence, the correct answer for the 15th number should be 610.  I set a breakpoint on the while loop on line 12, and start debug mode.  After stepping through one loop, f should be equal to 1, but it turns out it's equal to 2.  There's two possible ways to solve this, either by setting the while loop to n > 2 (so it doesn't add the last two numbers together, because it effectively starts one too far in the sequence), or change f0 to be equal to 0, starting it at the beginning of the sequence.
+
+7. Run the program with the designated input of 90, get back print statements for everything but line 26.  Knowing it should only return one message, I set a breakpoint at line 5, where the method is called in main.  Stepping through, you can watch the debugger as it goes through every if statement. Since 90 is greater than 85, and all the subsequent ones except the less than 45 are true as well, it prints the System.out.println() message for each.  To fix this, starting on line 17 I would add else in front of each if, thus exiting the if comparison once one statement is true.
+
+8. Running the program gives an error 'Exception in thread "main" java.lang.NullPointerException at AccountDebug.main(AccountDebug.java:6)'.  Starting the debugger with a breakpoint on line 5, you can step through to line 6, but then when you try to step through line 6, it says 'main() is throwing NullPointerException (id=22)', just like the console error.  It's saying that at line 6, a.deposit(100);, there is a NullPointerException.  A NullPointerException, according to https://docs.oracle.com/javase/7/docs/api/java/lang/NullPointerException.html, is 'thrown when an application attempts to use null in a case where an object is required'.  It then lists some examples, of which the first one, 'Calling the instance method of a null object', is what line 6 is trying to do; call the deposit method of class Account on object a.
+
+You have to change line 5 to be 'Account a = new Account("TestName");'. This creates the object in memory and initializes it, rather than having a pointer to nothing.
+
+9. Running the program gives 'Exception in thread "main" java.lang.Error: Unresolved compilation problem: The constructor Person(String, int) is undefined	at PersonDebug.main(PersonDebug.java:4)'.  Line 4 in PersonDebug.java is trying to create a new Person object with the constructor Person(string, int), but is giving the error that it is undefined.  Setting a breakpoint at line 3 and trying to step through, it stops at line 4 and you get the same error as in the console.  Going to line 8 of Person.java, where the constructor is located, it has the wrong name (Student, as opposed to the name of the class, Person).
+
+After fixing that, running the program outputs 'The person is: null and null'.  Since it's undesireable to step into thr println on line 5, I set a breakpoint in Person.java (where the Class is defined) at line 15 for the class' method getName() (since it is the method called in the println).  When debugging, in the variables tab it lists 'this' with age having a value of 0 and name having a value of null (which now we know why it's printing null and null, since it calls getName() twice).  This tells us these variabes are unintialized when the getter performs the get.  Upon inspection of the variables declarations in the constructor for Person(string _name, int _age), we can see on line 10 and 11 that the format is improper.  It should be this.name = _name and this.age = _age, respectively (since you're setting it for the object that's going to be created).
+
+After fixing this, running the program outputs 'The person is: Fred Flintstone and is Fred Flintstone'.  As we mentioned earlier, the getName() method is called twice in the println, and presumably should get age the second time.  Changing the second from p.getName() to p.getAge() then outputs: 'The person is: Fred Flintstone and is 45'.
