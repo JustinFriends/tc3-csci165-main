@@ -1,46 +1,46 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Luigi extends Creature {
+public class Toad extends Creature {
 	
 	
-	public Luigi() {
-		this.setHealth(100);
-		this.setMaxHealth(100);
-		this.setAttackPower(20);
+	public Toad() {
+		this.setHealth(150);
+		this.setMaxHealth(150);
+		this.setAttackPower(15);
 		this.setDefense(0);
 		this.setMoveNumberOfSpaces(5);
-		this.setSightRange(22);
-		this.setAttackRange(5);
-		this.setDefaultColor(0, 255, 0);
+		this.setSightRange(16);
+		this.setAttackRange(3);
+		this.setDefaultColor(255, 255, 255);
 	}
 	
-	public Luigi(int maxX, int maxY) {
+	public Toad(int maxX, int maxY) {
 		super(maxX, maxY);
-		this.setHealth(100);
-		this.setMaxHealth(100);
-		this.setAttackPower(20);
-		this.setDefaultAttackPower(20);
+		this.setHealth(150);
+		this.setMaxHealth(150);
+		this.setAttackPower(15);
+		this.setDefaultAttackPower(15);
 		this.setDefense(0);
 		this.setDefaultDefense(0);
-		this.setMoveNumberOfSpaces(5);
-		this.setDefaultMoveNumberOfSpaces(5);
-		this.setSightRange(22);
-		this.setAttackRange(5);
-		this.setDefaultColor(0, 255, 0);  //Green.
+		this.setMoveNumberOfSpaces(10);
+		this.setDefaultMoveNumberOfSpaces(10);
+		this.setSightRange(16);
+		this.setAttackRange(3);
+		this.setDefaultColor(255, 255, 255);  //White.
 	}
 	
-	public Luigi(int health, int attackPower, int defense) {
+	public Toad(int health, int attackPower, int defense) {
 		super(health, attackPower, defense);
 	}
 	
-	public Luigi(int health, int attackPower, int defense, Weapon equippeWeapon, Armor equippedArmor, 
+	public Toad(int health, int attackPower, int defense, Weapon equippeWeapon, Armor equippedArmor, 
 			int[] color, int[] location) {
 		super(health, attackPower, defense, equippeWeapon, equippedArmor, 
 			color, location);
 	}
 	
-	public Luigi(int health, int attackPower, int defense, Weapon equippeWeapon, Armor equippedArmor, 
+	public Toad(int health, int attackPower, int defense, Weapon equippeWeapon, Armor equippedArmor, 
 					int[] color, int x, int y) {
 		super(health, attackPower, defense, equippeWeapon, equippedArmor, 
 				color, x, y);
@@ -50,12 +50,12 @@ public class Luigi extends Creature {
 	//Methods
 	/*@Override
 	public void move() {
-		System.out.println("Luigi's move method was called.");
+		System.out.println("Toad's move method was called.");
 	}*/
 	
 	@Override
 	public void attack(Creature creature) {
-		System.out.println("Luigi's attack method was called.");
+		System.out.println("Toad's attack method was called.");
 		
 		creature.setHealth(creature.getHealth() - this.getAttackPower());
 		
@@ -63,7 +63,7 @@ public class Luigi extends Creature {
 	
 	@Override
 	public void observe(ArrayList<Creature> creatureProximity, ArrayList<Item> itemProximity) {
-		System.out.println("Luigi's observe method was called.");
+		System.out.println("Toad's observe method was called.");
 		
 		int[] distanceToCreatures = new int[creatureProximity.size()];
 		int[] distanceToItems = new int[itemProximity.size()];
